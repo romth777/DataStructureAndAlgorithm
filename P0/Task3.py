@@ -43,3 +43,34 @@ Print the answer as a part of a message::
 to other fixed lines in Bangalore."
 The percentage should have 2 decimal digits
 """
+import re
+
+# partA
+rets = set()
+p = re.compile(r'\(080\)')
+
+cnt_b2any = 0
+cnt_b2b = 0
+for item in calls:
+    flg_call = False
+    flg_rev = False
+    if p.match(item[0]) is not None:
+        rets.add(item[0])
+        flg_call = True
+    if p.match(item[1]) is not None:
+        rets.add(item[1])
+        flg_rev = True
+
+    if flg_call:
+        if flg_rev:
+            cnt_b2b += 1
+            cnt_b2any += 1
+        else:
+            cnt_b2any += 1
+
+
+print("The numbers called by people in Bangalore have codes:")
+for item in rets:
+    print(item)
+
+print("{} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.".format(int(cnt_b2b / cnt_b2any * 100)))

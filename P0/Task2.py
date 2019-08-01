@@ -19,4 +19,11 @@ Print a message:
 "<telephone number> spent the longest time, <total time> seconds, on the phone during 
 September 2016.".
 """
+from collections import defaultdict
+phone_time = defaultdict(int)
+for item in calls:
+    phone_time[item[0]] += int(item[3])
+    phone_time[item[1]] += int(item[3])
 
+ret = sorted(phone_time.items(), key=lambda x:x[1], reverse=True)
+print("{} spent the longest time, {} seconds, on the phone during September 2016.".format(ret[0][0], ret[0][1]))
