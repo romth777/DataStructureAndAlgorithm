@@ -4,6 +4,7 @@ It's ok if you don't understand how to read files.
 """
 import csv
 
+
 with open('texts.csv', 'r') as f:
     reader = csv.reader(f)
     texts = list(reader)
@@ -55,10 +56,15 @@ for item in calls:
     flg_call = False
     flg_rev = False
     if p.match(item[0]) is not None:
-        rets.add(item[0])
+        if p.match(item[1]) is None:
+            if re.compile(r'[0-9]{4}').match(item[1]) is not None:
+                rets.add(item[1][0:4])
+            if re.compile(r'\([0-9]{3}\)').match(item[1]) is not None:
+                rets.add(item[1][1:4])
+            if re.compile(r'\([0-9]{4}\)').match(item[1]) is not None:
+                rets.add(item[1][1:5])
         flg_call = True
     if p.match(item[1]) is not None:
-        rets.add(item[1])
         flg_rev = True
 
     if flg_call:
@@ -67,10 +73,10 @@ for item in calls:
             cnt_b2any += 1
         else:
             cnt_b2any += 1
-
+rets = sorted(rets)
 
 print("The numbers called by people in Bangalore have codes:")
 for item in rets:
     print(item)
 
-print("{} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.".format(int(cnt_b2b / cnt_b2any * 100)))
+print("{} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.".format(round(cnt_b2b / cnt_b2any * 100)))

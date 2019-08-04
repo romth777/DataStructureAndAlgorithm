@@ -37,7 +37,9 @@ for item in calls:
     send_calls.add(item[0])
     receive_calls.add(item[1])
 
-print("These numbers could be telemarketers: ")
 for_telemarketers = send_calls.difference(send_texts, receive_texts, receive_calls)
+for_telemarketers = sorted(for_telemarketers)
+
+print("These numbers could be telemarketers: ")
 for item in for_telemarketers:
     print(item)

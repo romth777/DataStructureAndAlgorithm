@@ -25,5 +25,10 @@ for item in calls:
     phone_time[item[0]] += int(item[3])
     phone_time[item[1]] += int(item[3])
 
-ret = sorted(phone_time.items(), key=lambda x:x[1], reverse=True)
-print("{} spent the longest time, {} seconds, on the phone during September 2016.".format(ret[0][0], ret[0][1]))
+max_val = 0
+max_key = ""
+for key, val in phone_time.items():
+    if val > max_val:
+        max_val = val
+        max_key = key
+print("{} spent the longest time, {} seconds, on the phone during September 2016.".format(max_key, max_val))
