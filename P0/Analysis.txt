@@ -1,7 +1,7 @@
 # section1 Project
 ## Big O analysis
- * Task 0: O(1); no loops to run.
- * Task 1: O(N); one loop to seek all the data.
- * Task 2: O(N); one loop to seek all the data.
- * Task 3: O(N); one loop to seek all the data.
- * Task 4: O(N); one loop to seek all the data.
+ * Task 0: O(1); There are no loops to run. The data is in the list and just get by O(1).
+ * Task 1: O(N); There is one loop to seek all the data. The data is in the set and add with O(1) in the average case.
+ * Task 2: O(N); There is one loop to seek all the data. The data is in the dict and get with O(1) in the average case.
+ * Task 3: O(NlogN); There is one loop to seek all the data and sorted by NlogN algorithm. The data is in the list and just get by O(1).
+ * Task 4: O(NlogN); There is one loop to seek all the data and sorted by NlogN algorithm. The data is in the list and just get by O(1).
