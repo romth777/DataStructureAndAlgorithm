@@ -56,13 +56,15 @@ for item in calls:
     flg_call = False
     flg_rev = False
     if p.match(item[0]) is not None:
-        if p.match(item[1]) is None:
-            if re.compile(r'[0-9]{4}').match(item[1]) is not None:
-                rets.add(item[1][0:4])
+        if re.compile(r'[0-9]{4}').match(item[1]) is not None:
+            rets.add(item[1][0:4])
+        else:
             if re.compile(r'\([0-9]{3}\)').match(item[1]) is not None:
                 rets.add(item[1][1:4])
-            if re.compile(r'\([0-9]{4}\)').match(item[1]) is not None:
+            elif re.compile(r'\([0-9]{4}\)').match(item[1]) is not None:
                 rets.add(item[1][1:5])
+            elif re.compile(r'\([0-9]{5}\)').match(item[1]) is not None:
+                rets.add(item[1][1:6])
         flg_call = True
     if p.match(item[1]) is not None:
         flg_rev = True
@@ -79,4 +81,5 @@ print("The numbers called by people in Bangalore have codes:")
 for item in rets:
     print(item)
 
-print("{} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.".format(round(cnt_b2b / cnt_b2any * 100)))
+print("{} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.".format(round(cnt_b2b / cnt_b2any * 100, 2)))
+
