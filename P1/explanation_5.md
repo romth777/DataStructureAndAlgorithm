@@ -8,8 +8,8 @@ The explanation of blockchain is below.
 I used linked list for implementing blockchain model, linked list is constructed by nodes which includes information and hashes and link of next node and so on.
 
 ## Time analysis
-The time order is O(N) when build blockchain model with given list.
-The search order is O(N) to get a desired node.
+The time order is O(1) to add block to blockchain model with given list.
+The search order is O(N) to get a desired node where N is the size of blockchain.
 
 ## Space analysis
 The space order is O(N) for blockchain tree.

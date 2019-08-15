@@ -52,8 +52,26 @@ class LinkedList:
 
 def union(llist_1, llist_2):
     # Your Solution Here
-    llist = copy.deepcopy(llist_1)
-    llist.concat(llist_2)
+    set_1 = set()
+    set_2 = set()
+
+    node = llist_1.head
+    if node is not None:
+        while node.next:
+            set_1.add(node.value)
+            node = node.next
+
+    node = llist_2.head
+    if node is not None:
+        while node.next:
+            set_2.add(node.value)
+            node = node.next
+
+    items = set_1 | set_2
+
+    llist = LinkedList()
+    for item in items:
+        llist.append(item)
     return llist
 
 
@@ -63,14 +81,16 @@ def intersection(llist_1, llist_2):
     set_2 = set()
 
     node = llist_1.head
-    while node.next:
-        set_1.add(node.value)
-        node = node.next
+    if node is not None:
+        while node.next:
+            set_1.add(node.value)
+            node = node.next
 
     node = llist_2.head
-    while node.next:
-        set_2.add(node.value)
-        node = node.next
+    if node is not None:
+        while node.next:
+            set_2.add(node.value)
+            node = node.next
 
     items = set_1 & set_2
 
@@ -81,7 +101,6 @@ def intersection(llist_1, llist_2):
 
 
 # Test case 1
-
 linked_list_1 = LinkedList()
 linked_list_2 = LinkedList()
 
@@ -94,11 +113,13 @@ for i in element_1:
 for i in element_2:
     linked_list_2.append(i)
 
+print("case 1:")
+print(element_1)
+print(element_2)
 print(union(linked_list_1, linked_list_2))
 print(intersection(linked_list_1, linked_list_2))
 
 # Test case 2
-
 linked_list_3 = LinkedList()
 linked_list_4 = LinkedList()
 
@@ -111,11 +132,13 @@ for i in element_1:
 for i in element_2:
     linked_list_4.append(i)
 
+print("case 2:")
+print(element_1)
+print(element_2)
 print(union(linked_list_3, linked_list_4))
 print(intersection(linked_list_3, linked_list_4))
 
 # Test case 3
-
 linked_list_5 = LinkedList()
 linked_list_6 = LinkedList()
 
@@ -128,5 +151,27 @@ for i in element_1:
 for i in element_2:
     linked_list_6.append(i)
 
+print("case 3:")
+print(element_1)
+print(element_2)
 print(union(linked_list_5, linked_list_6))
 print(intersection(linked_list_5, linked_list_6))
+
+# Test case 4
+linked_list_7 = LinkedList()
+linked_list_8 = LinkedList()
+
+element_1 = []
+element_2 = []
+
+for i in element_1:
+    linked_list_7.append(i)
+
+for i in element_2:
+    linked_list_8.append(i)
+
+print("case 4:")
+print(element_1)
+print(element_2)
+print(union(linked_list_7, linked_list_8))
+print(intersection(linked_list_7, linked_list_8))

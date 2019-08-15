@@ -17,6 +17,11 @@ def find_files(suffix, path):
     Returns:
        a list of paths
     """
+    if suffix == "":
+        return "Suffix is empty!"
+    if not Path(path).exists():
+        return "This path doesn't exist!"
+
     # rets = [str(item) for item in Path(path).glob('**/*' + suffix)]
 
     rets = []
@@ -31,3 +36,5 @@ def find_files(suffix, path):
 
 if __name__ == "__main__":
     print(find_files('.c', './testdir'))
+    print(find_files('', './testdir'))
+    print(find_files('.c', './testdirdir'))

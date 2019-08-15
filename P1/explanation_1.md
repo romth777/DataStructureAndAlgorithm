@@ -9,8 +9,8 @@ I used a dictionary module for implementing cache, the key of dictionary is give
 In case of using dictionary the access order is O(1).
 
 ## Time analysis
-Access time order is O(1) because of using dictionary.
-However, in case of limitation my implementation operates O(n) because of the access count checking loop for each items.
+Access time order is O(1) because of using dictionary and for frequency ranking it operates O(1) by ordered dictionary.
+In my implementation the item which called move to the last of ordered dictionary.
 
 ## Space analysis
-Space order is O(N) for dictionary and no need to allocate additional space.
+Space order is O(N) for dictionary and no need to allocate additional space where N is the size of cache.

@@ -10,7 +10,7 @@ Additionally I use dictionary for codes to character.
 
 ## Time analysis
 Before modifying binary tree, we need to sort by frequency.
-Thus, time order is O(NlogN) in the worst case for sorting.
+Thus, time order is O(NlogN) in the worst case for sorting where N is the length of frequency counted independent items.
 After building up binary tree, huffman codes are with O(N) and encoding with O(N) because of one loop in there.
 Finally, the decoding is O(N) with one loop for each character.
 Totally this algorithm is O(NlogN)

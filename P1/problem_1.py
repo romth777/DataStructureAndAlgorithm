@@ -1,28 +1,27 @@
-from queue import Queue
+from collections import OrderedDict
 
 
 class LRU_Cache(object):
     def __init__(self, capacity):
         self.capacity = capacity
-        self.cache = dict()
+        self.cache = OrderedDict()
 
     def get(self, key):
+        if self.capacity <= 0:
+            return -1
         if key not in self.cache.keys():
             return -1
         else:
-            self.cache[key][1] += 1
-            return self.cache[key][0]
+            self.cache.move_to_end(key)
+            return self.cache[key]
 
     def set(self, key, value):
-        if len(self.cache) >= 5:
-            min_freq = 10**9
-            remove_key = 0
-            for k, v in self.cache.items():
-                if v[1] < min_freq:
-                    remove_key = k
-                    min_freq = v[1]
-            self.cache.pop(remove_key)
-        self.cache[key] = [value, 0]
+        if self.capacity <= 0:
+            print("Can't perform operations on 0 capacity cache")
+        else:
+            if len(self.cache) >= self.capacity:
+                self.cache.popitem(last=False)
+            self.cache[key] = value
 
 
 if __name__ == "__main__":
@@ -42,5 +41,16 @@ if __name__ == "__main__":
 
     assert our_cache.get(3) == -1      # returns -1 because the cache reached it's capacity and 3 was the least recently used entry
     print(our_cache.cache)
+
+    our_cache = LRU_Cache(2)
+    our_cache.set(1, 1)
+    our_cache.set(2, 2)
+    our_cache.set(1, 10)
+    assert our_cache.get(1) == 10
+    assert our_cache.get(2) == 2
+
+    our_cache = LRU_Cache(0)
+    our_cache.set(1, 1)
+    assert our_cache.get(1) == -1
 
 

@@ -53,77 +53,92 @@ class Node:
             return '{}:{} {}:{} {}:{}'.format(self.char, self.value, self.left.char, self.left.value, self.right.char, self.right.value)
 
 
-char2code = dict()
-code2char = dict()
+class HuffmanCoding:
+    def __init__(self):
+        self.char2code = dict()
+        self.code2char = dict()
 
+    def huffman_encoding(self, data):
+        if data == "":
+            return "No data to encode!", None
+        splited_data = list(data)
+        items = collections.Counter(splited_data).items()
+        items = sorted(items, key=lambda x: x[1])
+        h = []
+        for item in items:
+            n = Node(item[1], item[0])
+            heappush(h, n)
 
-def huffman_encoding(data):
-    splited_data = list(data)
-    items = collections.Counter(splited_data).items()
-    items = sorted(items, key=lambda x: x[1])
-    h = []
-    for item in items:
-        n = Node(item[1], item[0])
-        heappush(h, n)
+        while len(h) != 1:
+            z = Node()
+            x = heappop(h)
+            y = heappop(h)
+            z.set_left_child(x)
+            z.set_right_child(y)
+            z.set_value(x.get_value() + y.get_value())
+            heappush(h, z)
+        hh = h.copy()
 
-    while len(h) != 1:
-        z = Node()
-        x = heappop(h)
-        y = heappop(h)
-        z.set_left_child(x)
-        z.set_right_child(y)
-        z.set_value(x.get_value() + y.get_value())
-        heappush(h, z)
-    hh = h.copy()
+        root = heappop(h)
+        current_code = ""
+        if root.left is None and root.right is None:
+            current_code = "0"
 
-    root = heappop(h)
-    current_code = ""
+        def make_codes_helper(root, current_code):
+            if root is None:
+                return
+            if root.char is not None:
+                self.char2code[root.char] = current_code
+                self.code2char[current_code] = root.char
+                return
+            make_codes_helper(root.left, current_code + "0")
+            make_codes_helper(root.right, current_code + "1")
 
-    def make_codes_helper(root, current_code):
-        if root is None:
-            return
-        if root.char is not None:
-            char2code[root.char] = current_code
-            code2char[current_code] = root.char
-            return
-        make_codes_helper(root.left, current_code + "0")
-        make_codes_helper(root.right, current_code + "1")
+        make_codes_helper(root, current_code)
 
-    make_codes_helper(root, current_code)
+        encoded_data = []
+        for item in splited_data:
+            encoded_data.append(self.char2code[item])
 
-    encoded_data = []
-    for item in splited_data:
-        encoded_data.append(char2code[item])
+        return ''.join(encoded_data), hh
 
-    return ''.join(encoded_data), hh
-
-
-def huffman_decoding(data, tree):
-    current_code = ""
-    decoded_text = ""
-    for bit in data:
-        current_code += bit
-        if current_code in code2char:
-            character = code2char[current_code]
-            decoded_text += character
-            current_code = ""
-    return decoded_text
+    def huffman_decoding(self, data, tree):
+        current_code = ""
+        decoded_text = ""
+        for bit in data:
+            current_code += bit
+            if current_code in self.code2char:
+                character = self.code2char[current_code]
+                decoded_text += character
+                current_code = ""
+        return decoded_text
 
 
 if __name__ == "__main__":
-    codes = {}
-
+    hc = HuffmanCoding()
     a_great_sentence = "The bird is the word"
+    print("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
+    print("The content of the data is: {}\n".format(a_great_sentence))
+    encoded_data, tree = hc.huffman_encoding(a_great_sentence)
+    print("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
+    print("The content of the encoded data is: {}\n".format(encoded_data))
+    decoded_data = hc.huffman_decoding(encoded_data, tree)
+    print("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
+    print("The content of the encoded data is: {}\n".format(decoded_data))
 
-    print ("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
-    print ("The content of the data is: {}\n".format(a_great_sentence))
+    hc = HuffmanCoding()
+    a_great_sentence = "AAAAAAAAAA"
+    print("The content of the data is: {}\n".format(a_great_sentence))
+    encoded_data, tree = hc.huffman_encoding(a_great_sentence)
+    print("The content of the encoded data is: {}\n".format(encoded_data))
+    decoded_data = hc.huffman_decoding(encoded_data, tree)
+    print("The content of the encoded data is: {}\n".format(decoded_data))
 
-    encoded_data, tree = huffman_encoding(a_great_sentence)
+    hc = HuffmanCoding()
+    a_great_sentence = ""
+    print("The content of the data is: {}\n".format(a_great_sentence))
+    encoded_data, tree = hc.huffman_encoding(a_great_sentence)
+    print("The content of the encoded data is: {}\n".format(encoded_data))
+    decoded_data = hc.huffman_decoding(encoded_data, tree)
+    print("The content of the encoded data is: {}\n".format(decoded_data))
 
-    print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
-    print ("The content of the encoded data is: {}\n".format(encoded_data))
-
-    decoded_data = huffman_decoding(encoded_data, tree)
-
-    print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
-    print ("The content of the encoded data is: {}\n".format(decoded_data))

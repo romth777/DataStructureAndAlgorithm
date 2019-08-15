@@ -4,17 +4,33 @@ from time import gmtime, strftime
 
 class BlockChain:
     def __init__(self):
-        self.root = Block("Some Information", 0)
+        self.root = None
         self.current_node = self.root
+        self.num_nodes = 0
 
-    def add_block(self, data="Some Information"):
-        new_block = Block(data, self.current_node.hash)
+    def add_block(self, data):
+        if data == "" or data is None:
+            print("No input data!")
+        else:
 
-        if self.current_node == self.root:
-            self.root.next_node = new_block
+            if self.root is None:
+                new_block = Block(data, 0)
+                self.root = new_block
+                self.current_node = self.root
+            else:
+                new_block = Block(data, self.current_node.hash)
+                if self.current_node == self.root:
+                    self.root.next_node = new_block
 
-        self.current_node.next_node = new_block
-        self.current_node = self.current_node.next_node
+                self.current_node.next_node = new_block
+                self.current_node = self.current_node.next_node
+                self.num_nodes += 1
+
+    def __str__(self):
+        if self.root is None:
+            return "Block chain empty!"
+        else:
+            return "{} blocks are in chain!".format(self.num_nodes)
 
 
 class Block:
@@ -33,6 +49,14 @@ class Block:
     def get_timestamp(self):
         return strftime("%H:%M %m/%d/%Y", gmtime())
 
+    def __str__(self):
+        ret = ""
+        ret += 'previous hash: {}\n'.format(self.previous_hash)
+        ret += 'data: {}\n'.format(self.data)
+        ret += 'current hash: {}\n'.format(self.hash)
+        ret += 'current timestamp: {}'.format(self.timestamp)
+        return ret
+
 
 if __name__ == "__main__":
     blockchain = BlockChain()
@@ -45,12 +69,21 @@ if __name__ == "__main__":
         prev = current_node.previous_hash
         cur = current_node.hash
         assert prev != cur
-
-        print('previous hash: {}'.format(current_node.previous_hash))
-        print('data: {}'.format(current_node.data))
-        print('current hash: {}'.format(current_node.hash))
-        print('current timestamp: {}'.format(current_node.timestamp))
+        print(str(current_node))
         print("-----")
         current_node = current_node.next_node
+
+    blockchain = BlockChain()
+    print(blockchain)
+    print("-----")
+
+    blockchain = BlockChain()
+    blockchain.add_block("")
+    print("-----")
+
+    blockchain = BlockChain()
+    blockchain.add_block(None)
+    print("-----")
+
 
 

@@ -3,13 +3,13 @@
 I implemented Finding Files with given suffix from directories including sub directories.
 
 ## Data structure
-I used recursive search algorithms, so I use list for pooling next directory to search.
-Especially this is like a DFS using list as a stack.
+I used recursive search algorithms, so I needed list for pooling next directory to search.
 
 ## Time analysis
 Access time order is O(D) where D is the maximum depth of directories.
-In my DFS like searching I did not implementing pruning, so my algorithm needs to access all of the files.
+My recursive search iterates on the depth of recursion, thus time order is O(D).
 
 ## Space analysis
-In the recursive function we need more space than non-recursive functions.
 A space order is O(D) where D is the maximum depth of directories. 
+My recursive search iterates on the depth of directories and in the worst case pool all the directories in the list.
+Thus, the space needed O(D).
