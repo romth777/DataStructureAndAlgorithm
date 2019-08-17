@@ -11,17 +11,20 @@ def rearrange_digits(input_list):
         return []
     elif len(input_list) == 1:
         return [input_list[0]]
-    sorted_list = sorted(input_list, reverse=True)
+
     item1 = ""
     item2 = ""
-    for item in sorted_list:
-        if len(item1) == 0 and len(item2) == 0:
-            item1 += str(item)
-        else:
-            if len(item2) < len(item1):
-                item2 += str(item)
+    max_index = max(input_list)
+    min_index = min(input_list)
+    for i in range(max_index, min_index - 1, -1):
+        if i in input_list:
+            if len(item1) == 0 and len(item2) == 0:
+                item1 += str(i)
             else:
-                item1 += str(item)
+                if len(item2) < len(item1):
+                    item2 += str(i)
+                else:
+                    item1 += str(i)
     return [int(item1), int(item2)]
 
 

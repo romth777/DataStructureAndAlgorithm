@@ -1,4 +1,3 @@
-import math
 def get_min_max(ints):
     """
     Return a tuple(min, max) out of list of unsorted integers.
@@ -9,8 +8,8 @@ def get_min_max(ints):
     if len(ints) == 0:
         return (None, None)
 
-    item_max = -math.inf
-    item_min = math.inf
+    item_max = -float("inf")
+    item_min = float("inf")
 
     for item in ints:
         if item > item_max:

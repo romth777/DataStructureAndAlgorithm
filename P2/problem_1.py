@@ -7,6 +7,11 @@ def sqrt(number):
     Returns:
        int: Floored Square Root
     """
+    if not isinstance(number, int) and not isinstance(number, float):
+        return -1
+
+    if number < 0:
+        return -1
     lower = 0
     upper = number
     while lower <= upper:
@@ -29,3 +34,5 @@ print("Pass" if  (0 == sqrt(0)) else "Fail")
 print("Pass" if  (4 == sqrt(16)) else "Fail")
 print("Pass" if  (1 == sqrt(1)) else "Fail")
 print("Pass" if  (5 == sqrt(27)) else "Fail")
+print("Pass" if  (-1 == sqrt(-1)) else "Fail")
+print("Pass" if  (-1 == sqrt("Hello")) else "Fail")

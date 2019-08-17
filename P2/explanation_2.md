@@ -19,4 +19,4 @@ Required time complexity is O(logN) where N is size of array, and my implementat
 
 ## Space analysis
 Space complexity is O(N) for given array.
-Additionally, my implementation is recurrent version of binary search so the function call stack needed O(logN).
+Additionally, one of my implementation is recurrent version of binary search so in this case the function call stack needed O(logN).

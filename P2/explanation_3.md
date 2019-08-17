@@ -9,11 +9,11 @@ There is no need to use specific data structure in this task by using binary sea
 However, an array is given.
 
 ## Algorithm
-I solved this task with sort and one loop.
-The strategy of this task is stack high digit from bigger number, so I need to sort an given array.
+I solved this task with one for loop.
+The strategy of this task is stack high digit from bigger number using max and min item in the input list so no need to sort array.
 
 ## Time analysis
-Required time complexity is O(NlogN) where N is size of array, and my implementation is on it.
+Required time complexity is O(N) for get max and min item of input list where N is size of array and one for loop for these range, and my implementation is on it.
 
 ## Space analysis
 Space complexity is O(N) for given array.
