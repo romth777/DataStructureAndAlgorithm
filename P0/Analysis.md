@@ -7,7 +7,7 @@
  * Task 4: O(NlogN); There is one loop to seek all the data and sorted by NlogN algorithm. The data is in the list and just get by O(1).
 
 ## Supported links by reviewers
-https://wiki.python.org/moin/TimeComplexity
-https://www.ics.uci.edu/~pattis/ICS-33/lectures/complexitypython.txt
-https://www.quora.com/What-is-the-time-complexity-of-the-Python-built-in-sorted-function
-https://docs.python.org/3/library/functions.html#round
+ * https://wiki.python.org/moin/TimeComplexity
+ * https://www.ics.uci.edu/~pattis/ICS-33/lectures/complexitypython.txt
+ * https://www.quora.com/What-is-the-time-complexity-of-the-Python-built-in-sorted-function
+ * https://docs.python.org/3/library/functions.html#round
